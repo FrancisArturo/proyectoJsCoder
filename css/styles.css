@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+  
+  a {
+    text-decoration: none;
+    color: black; }
+  
+  a:hover {
+    text-decoration: none;
+    color: black; }
+  
+  input {
+    color: fieldtext;
+    text-rendering: auto;
+    outline: none; }
+  
+  body {
+    font-family: "Questrial", sans-serif;
+    font-weight: 580;
+    font-style: normal;
+    background-color: #fcf7f1; }
+  
+  main {
+    display: block;
+    overflow: hidden; }
+  
+  #header-contenedor {
+    position: sticky;
+    z-index: 5000;
+    top: 0; }
+  
+  .header-top {
+    background-color: #fcd896;
+    display: flex;
+    flex-direction: none;
+    justify-content: center;
+    align-items: center;
+    padding-top: 7px;
+    padding-bottom: 7px; }
+    .header-top p {
+      margin-bottom: 0; }
+  
+  .header-bottom {
+    background-color: #fcf7f1;
+    border-bottom: 2px solid black; }
+  
+  .botoncomprarheader {
+    display: flex;
+    flex-direction: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: 2px solid black;
+    border-radius: 50px;
+    padding: 13px;
+    height: 100%;
+    margin-left: 50px;
+    margin-right: 0;
+    color: black;
+    transition: background-color .3s, color .3s; }
+    .botoncomprarheader:hover {
+      background-color: black;
+      color: white; }
+  
+  .logoflexible-2 {
+    padding-left: 70px;
+    vertical-align: middle; }
+    .logoflexible-2 img {
+      object-fit: cover; }
+  
+  .logoflexible-1 {
+    display: none; }
+  
+  .links-flexibles {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: none;
+    display: none; }
+    .links-flexibles img {
+      height: 28px;
+      margin: 10px; }
+
+
+      #footer-contenedor {
+        display: flex;
+        flex-direction: column;
+        justify-content: none;
+        align-items: none; }
+        #footer-contenedor .footer-newsletter {
+          background-color: #fcd896;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: none;
+          padding: 20px 0; }
+      
+      .newsletter-texto {
+        margin-right: 40px; }
+      
+      .entrada {
+        font-size: 32px; }
+      
+      .parrafo {
+        font-size: 18px;
+        margin-top: 15px; }
+      
+      .newsletter-input {
+        width: 100%;
+        display: flex;
+        flex-direction: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #fae6c2;
+        border: 1px solid black;
+        border-radius: 30px;
+        margin-top: 12px; }
+      
+      #email {
+        border: unset;
+        border-color: unset;
+        background-color: unset;
+        margin-right: 30px;
+        padding-left: 6px;
+        font-weight: 500;
+        font-size: 20px; }
+        #email:focus {
+          background-color: #fcd896; }
+      
+      .enviar {
+        background-color: unset;
+        border: unset;
+        cursor: pointer; }
+        .enviar img {
+          width: 24px;
+          height: 24px; }
+      
+      .footer-navinfo {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        align-items: center;
+        padding: 45px; }
+      
+      .links {
+        display: grid;
+        grid-template-columns: repeat(4, 170px);
+        column-gap: 10px; }
+      
+      .links-grupo {
+        display: flex;
+        flex-direction: column;
+        justify-content: none;
+        align-items: none; }
+        .links-grupo h3 {
+          font-size: 25px;
+          margin-bottom: 4px;
+          font-weight: 600; }
+        .links-grupo a {
+          text-decoration: none;
+          font-size: 15px;
+          margin-top: 15px; }
+          .links-grupo a img {
+            height: 22px;
+            margin-right: 10px; }
+      
+      .span-redes {
+        display: flex; }
+      
+      .logofooter {
+        margin-top: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: none;
+        align-items: none; }
+      
+      .logobottom {
+        width: 250px;
+        height: auto;
+        vertical-align: middle; }
+      
+      .copyright {
+        font-size: 15px;
+        margin-top: 9px; }

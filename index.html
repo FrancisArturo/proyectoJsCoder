@@ -3,10 +3,120 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script defer src="./js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>Tienda de galletas</h1>
+    <header id="header-contenedor">
+        <div class="header">
+            <div class="header-top">
+                <p>Envíos gratis a partir de $8000</p>
+            </div>
+            <div class="header-bottom">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand logoflexible-1" href="index.html">
+                        <img src="images/logo5.png" alt="logo de la empresa" width="220" height="auto">
+                        </a>
+                      <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo03">
+                        <a href="pages/productos.html" class="botoncomprarheader"> Comprar Ahora</a>
+                        <a class="navbar-brand logoflexible-2 me-0" href="index.html">
+                            <img src="images/logo5.png" alt="logo de la empresa" width="270" height="auto">
+                        </a>
+                        <ul class="navbar-nav me-0 mb-2 mb-lg-0">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pages/historia.html">Historia</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pages/contacto.html">Contacto</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pages/local.html">Local</a>
+                          </li>
+                        </ul>
+                        <div class="links-flexibles">
+                            <a href="https://www.instagram.com/" target="_blank"> 
+                                <img src="images/instagram.png" alt="logo instagram">                   
+                            </a>
+                            <a href="https://www.facebook.com/" target="_blank">
+                                <img src="images/facebook.png" alt="logo facebook">
+                            </a>
+                            <a href="https://twitter.com/" target="_blank">
+                                <img src="images/twitter.png" alt="logo twitter">
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        
+    </main>
+    <footer id="footer-contenedor">
+        <div class="footer-newsletter">
+            <div class="newsletter-texto">
+                <p class="entrada"> Suscribíte a nuestra newsletter</p>
+                <p class="parrafo"> Recibí información sobre descuentos exclusivos!</p>
+            </div>
+            <form action="" id="newsletter-form">
+                <div class="newsletter-input">
+                    <input type="email" name="mail" id="email" placeholder="Correo electrónico">
+                    <button type="submit" class="enviar">
+                        <img src="images/enviar.png" alt="boton enviar">
+                    </button>
+                </div>  
+            </form>
+        </div>
+        <div class="footer-navinfo">
+            <div class="links">
+                <div class="links-grupo">
+                    <h3>Comprar</h3>
+                    <a href="pages/productos.html"> Productos </a>
+                    <a href="pages/productos.html"> Comprar Ahora</a>
+                </div>
+                <div class="links-grupo">
+                    <h3>Nosotros</h3>
+                    <a href="pages/historia.html">Historia</a>
+                    <a href="pages/local.html">Local</a>
+                    <a href="pages/contacto.html">Contacto</a>
+                </div>
+                <div class="links-grupo">
+                    <h3>Redes</h3>
+                    <a href="https://www.instagram.com/" target="_blank" class="span-redes"> 
+                        <img src="images/instagram.png" alt="logo instagram">
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" class="span-redes">
+                        <img src="images/facebook.png" alt="logo facebook">
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" class="span-redes">
+                        <img src="images/twitter.png" alt="logo twitter">
+                        <span>Twitter</span>
+                    </a>
+                </div>
+                <div class="links-grupo">
+                    <h3>Legal</h3>
+                    <a href="index.html">Términos y condiciones</a>
+                    <a href="index.html">Política de privacidad</a>
+                </div>
+            </div>
+            <div class="logofooter">
+                <img src="images/logo3.png" alt="logo de la empresa" class="logobottom">
+                <span class="copyright">©2022 by The cookiemint</span>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
