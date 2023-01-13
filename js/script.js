@@ -9,7 +9,7 @@ La tienda tiene 3 variedades de galletas que se venden en cajas de 800gr*/
 let elegida;
 let posicion;
 let pedidoRecup;
-let suma;
+let suma = 0;
 let subtotal;
 
 function cambiarGalleta (galleta, source) {
@@ -18,6 +18,19 @@ function cambiarGalleta (galleta, source) {
 function recupCarrito () {
     pedidoRecup = JSON.parse(localStorage.getItem("carritoStorage"));
     return pedidoRecup;
+}
+
+function agregarCarrito () {
+    if (pedidoRecup.length > 0){
+        ultimoElemento = pedidoRecup[pedidoRecup.length - 1]
+        const elemento = document.createElement("P");
+        elemento.classList.add("borde");
+        elemento.innerHTML = `Nombre: ${ultimoElemento.nombre} <br> Precio: ${ultimoElemento.precio} <br> Cantidad: ${cantidad.value} `;  
+        subtotal = ultimoElemento.precio * cantidad.value;
+        suma += subtotal;
+        sumaTotal.innerHTML = `Total: ${suma}`;
+        productosPedidos.appendChild(elemento);
+    }
 }
 
 // function sumarTotal() {
@@ -67,9 +80,6 @@ let sumaTotal = document.getElementById("total");
 cantidad.value = 1;
 
 
-
-
-
 for (const element of opcionesGalleta) {
     element.addEventListener("click", ()=> {
         
@@ -116,17 +126,5 @@ botonAgregar.addEventListener("click", ()=> {
     recupCarrito();
     agregarCarrito();
 })
-
-function agregarCarrito () {
-    if (pedidoRecup.length > 0){
-        ultimoElemento = pedidoRecup[pedidoRecup.length - 1]
-        const elemento = document.createElement("P");
-        elemento.classList.add("borde");
-        elemento.innerHTML = `Nombre: ${ultimoElemento.nombre} <br> Precio: ${ultimoElemento.precio} <br> Cantidad: ${cantidad.value} `;  
-        suma += ultimoElemento.precio * cantidad.value;
-        sumaTotal.innerHTML = `Total: ${suma}`;
-        productosPedidos.appendChild(elemento);
-    }
-}
 
 
