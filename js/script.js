@@ -1,26 +1,40 @@
 /*Sección Compras en tienda de galletas veganas 
-La tienda tiene 3 variedades de galletas que se venden en cajas de 800gr*
-Se hacen envios gratis a partir de $8000*/
+La tienda tiene 3 variedades de galletas que se venden en cajas de 800gr*/
 
 
 
-let cantidad;
-let galleta;
-let agregar;
-let iva;
-let sumaSubtotal = 0;
-const envio = 2000;
-let confir;
-let total;
 
-//constructor para los productos
+
+
+let elegida;
+let posicion;
+let pedidoRecup;
+let suma;
+let subtotal;
+
+function cambiarGalleta (galleta, source) {
+    galleta.src = source;
+}
+function recupCarrito () {
+    pedidoRecup = JSON.parse(localStorage.getItem("carritoStorage"));
+    return pedidoRecup;
+}
+
+// function sumarTotal() {
+//     for (elemento of pedidoRecup) {
+//         subtotal += elemento.precio * cantidad.value;
+//     }
+// }
+
+
 
 class variedad {
-    constructor(nombre, precio, peso, ingred, id) {
+    constructor(nombre, precio, peso, ingred, imagen, id) {
         this.nombre = nombre;
         this.precio = precio;
         this.peso = peso;
         this.ingred = ingred;
+        this.imagen = imagen;
         this.id = id;
     }
     ivaPrecio() {
@@ -28,94 +42,91 @@ class variedad {
     }
 }
 
-//array de productos y de los precios de los productos pedidos para sumar el subtotal
-const productos = []
-const subtotal = []
+const productos = [];
 
-//objetos del array de productos
-
-productos.push(new variedad ("Galletas Chip de chocolate", 2000, 800, "anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "a"));
-productos.push(new variedad ("Galletas Doble chocolate", 1900, 800, "anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "b"));
-productos.push(new variedad ("Galletas Maní", 1800, 800, "anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "c"));
-
-// metodo para sumar el iva a los precios de los productos
+productos.push(new variedad ("Galletas Chips de Chocolate", 2000, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "./images/galletaChip Chocolate.jpg", 1));
+productos.push(new variedad ("Galletas Doble Chocolate", 1900, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaDobleChocolate.jpg", 2));
+productos.push(new variedad ("Galletas Mani", 1800, 800, "Anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaMani.jpg", 3));
 
 for (const variedad of productos) {
     variedad.ivaPrecio();
 }
 
-// función usando reduce para calcular el subtotal
+let opcionesGalleta = document.getElementsByClassName("variedades");
+let imagen = document.getElementById("imagenGalletas");
+let nombreGalleta = document.getElementById("titulo-galletas");
+let ingredientes = document.getElementById("ingrGalleta");
+let cantidad = document.getElementById("inputCantidad");
+let botonMenos = document.getElementById("menos");
+let botonMas = document.getElementById("mas");
+let botonAgregar = document.getElementById("agregar-producto");
+let productosPedidos = document.getElementById("productos");
+let carritoBoton = document.getElementById("boton-carrito");
+let sumaTotal = document.getElementById("total");
 
-function sumarSubtotal() {
-    sumaSubtotal = subtotal.reduce((acumulador, elemento) => acumulador + elemento, 0)
-}
-
-//función para que el usuario elija el tipo de galleta
-
-function elegirGalleta() {
-    switch (galleta) {
-        case "a": 
-            cantidad = prompt("Datos del producto \nNombre del producto: "+productos[0].nombre+ "\nPeso: "+productos[0].peso+" gr.\nIngredientes: "+productos[0].ingred+"\nPrecio: $"+productos[0].precio+ "\n\nCuantas unidades desea comprar? (ingrese un numero)");
-            subtotal.push(productos[0].precio * cantidad);
-            sumarSubtotal();
-            break;
-        case "b":
-            cantidad = prompt("Datos del producto \nnNombre del producto: "+productos[1].nombre+ "\nPeso: "+productos[1].peso+" gr.\nIngredientes: "+productos[1].ingred+"\nPrecio: $"+productos[1].precio+ "\n\nCuantas unidades desea comprar? (ingrese un numero)");
-            subtotal.push(productos[1].precio * cantidad);
-            sumarSubtotal();
-            break;
-        case "c":
-            cantidad = prompt("Datos del producto \nNombre del producto: "+productos[2].nombre+ "\nPeso: "+productos[2].peso+" gr.\nIngredientes: "+productos[2].ingred+"\nPrecio: $"+productos[2].precio+ "\n\nCuantas unidades desea comprar? (ingrese un numero)");
-            subtotal.push(productos[2].precio * cantidad);
-            sumarSubtotal();
-            break;
-        case "d":
-            alert("Entendido! que tengas un buen día.");
-            break;
-        default: 
-            alert("La opción que elegiste no es correcta, volvé a intentarlo!");
-            break;
-    }
-}
+cantidad.value = 1;
 
 
 
-galleta = prompt("Escriba la letra de la variedad que desea comprar: \n\na- Galletas chip de chocolate\nb- Galletas doble chocolate\nc- Galletas de maní\nd- No deseo, gracias.").toLowerCase();
 
-//ciclo para elegir y agregar productos
 
-do {
-    elegirGalleta();
-    if (galleta == "d") {
-        break;
-    } else if (galleta == "a" || galleta == "b" || galleta =="c") {
-        agregar = prompt("El subtotal de su pedido es: $"+sumaSubtotal+"\n\nDesea agregar algo más a su pedido? (escriba la letra de la opción)\na-  Si, deseo agregar algo más\nb-  No, esta bien.").toLowerCase();
-        if (agregar == "b") {
-            break;
+for (const element of opcionesGalleta) {
+    element.addEventListener("click", ()=> {
+        
+        let variedadElegida = element.id;   
+        elegida = productos.find(variedad => variedad.nombre == variedadElegida);
+        posicion = productos.findIndex(variedad => variedad.nombre == variedadElegida);
+        cambiarGalleta(imagen, elegida.imagen);
+        nombreGalleta.innerText = elegida.nombre;
+        ingredientes.innerText = elegida.ingred;
+
+        for (const objeto of opcionesGalleta) {
+            if ( objeto.id == variedadElegida){
+                objeto.classList.add("active");
+            } else {
+                objeto.classList.remove("active");
+            }
         }
-    } else {
-        break;
-    }
-    galleta = prompt("Escriba la letra de la variedad que desea comprar: \n\na- Galletas chip de chocolate\nb- Galletas doble chocolate\nc- Galletas de maní").toLowerCase();
-}while (agregar == "a")
+    })
+}
 
-
-//condicionales para mostrar los datos del pedido y averiguar si el envio es gratis o no. 
-
-if (sumaSubtotal != 0) {
-    if(sumaSubtotal >= 8000) {
-        total = sumaSubtotal;
-        alert("Datos de su pedido:\nSubtotal: $"+sumaSubtotal+"\nEnvío: Gratis\nPrecio Total: $"+total);
-        confir = prompt("Quiere confirmar el pedido? (escriba la letra de la opción)\na- SI \nb- NO").toLowerCase();
-    } else {
-        total = sumaSubtotal + envio;
-        alert("Datos de su pedido:\nSubtotal: $"+sumaSubtotal+"\nEnvío: $"+envio+"\nPrecio Total: $"+total);
-        confir = prompt("Quiere confirmar el pedido? (escriba la letra de la opción)\na- SI \nb- NO").toLowerCase();
+botonMenos.addEventListener("click", ()=> {
+    if (cantidad.value > 1){
+        cantidad.value --;
     }
-    if (confir == "a") {
-        alert("Felicitaciones, su pedido fue realizado correctamente");
-    } else {
-        alert("Su pedido fue cancelado exitosamente");
+})
+
+botonMas.addEventListener("click", ()=> {
+    cantidad.value ++;
+})
+
+let carrito = [];
+
+class pedido {
+    constructor(nombre, precio, cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
     }
-} 
+}
+
+botonAgregar.addEventListener("click", ()=> {
+    carrito.push(new pedido (productos[posicion].nombre, productos[posicion].precio, cantidad.value));
+    localStorage.setItem("carritoStorage", JSON.stringify(carrito));
+    recupCarrito();
+    agregarCarrito();
+})
+
+function agregarCarrito () {
+    if (pedidoRecup.length > 0){
+        ultimoElemento = pedidoRecup[pedidoRecup.length - 1]
+        const elemento = document.createElement("P");
+        elemento.classList.add("borde");
+        elemento.innerHTML = `Nombre: ${ultimoElemento.nombre} <br> Precio: ${ultimoElemento.precio} <br> Cantidad: ${cantidad.value} `;  
+        suma += ultimoElemento.precio * cantidad.value;
+        sumaTotal.innerHTML = `Total: ${suma}`;
+        productosPedidos.appendChild(elemento);
+    }
+}
+
 

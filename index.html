@@ -10,113 +10,85 @@
     <title>Document</title>
 </head>
 <body>
-    <header id="header-contenedor">
-        <div class="header">
-            <div class="header-top">
-                <p>Envíos gratis a partir de $8000</p>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #bd8260;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="./images/logo3.png" alt="" width="100" height="auto"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="d-flex">
+                    <button id="boton-carrito"  type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Carrito
+                    </button>
+                    <button type="button" class="btn btn-warning me-2">Warning</button>
+                </div>
             </div>
-            <div class="header-bottom">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <a class="navbar-brand logoflexible-1" href="index.html">
-                        <img src="images/logo5.png" alt="logo de la empresa" width="220" height="auto">
-                        </a>
-                      <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo03">
-                        <a href="pages/productos.html" class="botoncomprarheader"> Comprar Ahora</a>
-                        <a class="navbar-brand logoflexible-2 me-0" href="index.html">
-                            <img src="images/logo5.png" alt="logo de la empresa" width="270" height="auto">
-                        </a>
-                        <ul class="navbar-nav me-0 mb-2 mb-lg-0">
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pages/historia.html">Historia</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pages/productos.html">Productos</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pages/contacto.html">Contacto</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pages/local.html">Local</a>
-                          </li>
-                        </ul>
-                        <div class="links-flexibles">
-                            <a href="https://www.instagram.com/" target="_blank"> 
-                                <img src="images/instagram.png" alt="logo instagram">                   
-                            </a>
-                            <a href="https://www.facebook.com/" target="_blank">
-                                <img src="images/facebook.png" alt="logo facebook">
-                            </a>
-                            <a href="https://twitter.com/" target="_blank">
-                                <img src="images/twitter.png" alt="logo twitter">
-                            </a>
-                        </div>
-                      </div>
-                    </div>
-                </nav>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tu Pedido</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class = "tituloCarrito">
+                    <h5>Productos</h5>
+                </div>
+                <div id="productos">
+                    <p id="total">Total: </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir Comprando</button>
+                <button type="button" class="btn btn-primary">Comprar</button>
             </div>
         </div>
+    </div>
+  </div>
+        </nav>
     </header>
     <main>
-        
+        <div class="contenedor p-5">
+            <div class="row">
+                <div class="columna">
+                    <img id="imagenGalletas" src="./images/galletaChip Chocolate.jpg" alt="">
+                </div>
+                <div class="info-producto columna px-5">
+                    <h1 class= "mb-5 text-start" id="titulo-galletas">Galletas Chips de Chocolate</h1>
+                    <div>
+                        <div class="opciones-galletas d-flex flex-row mb-5">
+                            <a id ="Galletas Chips de Chocolate"  class = "variedades d-flex flex-row justify-content-center align-items-center active fondo1"  href="#" ><img src="./images/chocolate_chip_can_cutout_100x.avif" alt="galleta chip de chocolate"></a>
+                            <a id="Galletas Doble Chocolate" class = "variedades d-flex flex-row justify-content-center align-items-center fondo2" href="#"><img src="./images/double_chocolate_can_cutout_100x.avif" alt="galleta doble chocolate"></a>
+                            <a id="Galletas Mani" class = "variedades d-flex flex-row justify-content-center align-items-center fondo3"  href="#"><img src="./images/peanut_butter_can_cutout_100x.avif" alt="galleta mani"></a>
+                        </div>
+                        <div class="cantidad-galletas row">
+                            <div class="contenedor-cantidad">
+                                <svg id="menos" xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" display="block" id="Minus"><path d="M20 12H4"></path></svg>
+                                <input id="inputCantidad" class= "input-cantidad text-center" type="number" value="cantidad">
+                                <svg id="mas" xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" display="block" id="Plus"><path d="M12 20v-8m0 0V4m0 8h8m-8 0H4"></path></svg>
+                            </div>
+                            <div class="boton-agregar">
+                                <button id="agregar-producto">Agregar</button>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="descripcion">
+                        <div class="titulo-ingredientes d-flex">
+                            <p class="titulo">Ingredientes</p>
+                        </div>
+                        <span class="ingredientes">
+                            <p id="ingrGalleta">
+                                Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.
+                            </p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer id="footer-contenedor">
-        <div class="footer-newsletter">
-            <div class="newsletter-texto">
-                <p class="entrada"> Suscribíte a nuestra newsletter</p>
-                <p class="parrafo"> Recibí información sobre descuentos exclusivos!</p>
-            </div>
-            <form action="" id="newsletter-form">
-                <div class="newsletter-input">
-                    <input type="email" name="mail" id="email" placeholder="Correo electrónico">
-                    <button type="submit" class="enviar">
-                        <img src="images/enviar.png" alt="boton enviar">
-                    </button>
-                </div>  
-            </form>
-        </div>
-        <div class="footer-navinfo">
-            <div class="links">
-                <div class="links-grupo">
-                    <h3>Comprar</h3>
-                    <a href="pages/productos.html"> Productos </a>
-                    <a href="pages/productos.html"> Comprar Ahora</a>
-                </div>
-                <div class="links-grupo">
-                    <h3>Nosotros</h3>
-                    <a href="pages/historia.html">Historia</a>
-                    <a href="pages/local.html">Local</a>
-                    <a href="pages/contacto.html">Contacto</a>
-                </div>
-                <div class="links-grupo">
-                    <h3>Redes</h3>
-                    <a href="https://www.instagram.com/" target="_blank" class="span-redes"> 
-                        <img src="images/instagram.png" alt="logo instagram">
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://www.facebook.com/" target="_blank" class="span-redes">
-                        <img src="images/facebook.png" alt="logo facebook">
-                        <span>Facebook</span>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank" class="span-redes">
-                        <img src="images/twitter.png" alt="logo twitter">
-                        <span>Twitter</span>
-                    </a>
-                </div>
-                <div class="links-grupo">
-                    <h3>Legal</h3>
-                    <a href="index.html">Términos y condiciones</a>
-                    <a href="index.html">Política de privacidad</a>
-                </div>
-            </div>
-            <div class="logofooter">
-                <img src="images/logo3.png" alt="logo de la empresa" class="logobottom">
-                <span class="copyright">©2022 by The cookiemint</span>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
