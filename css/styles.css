@@ -129,3 +129,10 @@
 .borde {
   border: 1px solid black;
 }
+.bordeImagen {
+  border-right: 1px solid black;
+}
+.imagenCarrito {
+  width: 20%;
+  margin-right: 1rem;
+}
