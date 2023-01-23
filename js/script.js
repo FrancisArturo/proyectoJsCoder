@@ -4,7 +4,7 @@ La tienda tiene 3 variedades de galletas que se venden en cajas de 800gr*/
 // Variables
 let elegida;
 let posicion;
-let pedidoRecup;
+let pedidoRecup = [];
 let suma = 0;
 let subtotal;
 let elemento;
@@ -15,12 +15,6 @@ let conteoIdCarrito = 1;
 // funcion para cambiar la imagen de la galleta seleccionada
 function cambiarGalleta (galleta, source) {
     galleta.src = source;
-}
-
-// funcion para recuperar el carrito en el local storage
-function recupCarrito () {
-    pedidoRecup = JSON.parse(localStorage.getItem("carritoStorage"));
-    return pedidoRecup;
 }
 
 // funcion para asignar el id de los productos en el carrito y de los botones de eliminar
@@ -62,6 +56,17 @@ function agregarCarrito () {
         sumaConteoIdCarrito();
     });
 }
+
+// funcion para recuperar el carrito en el local storage
+function recupCarrito () {
+    if (localStorage.length > 0) {
+    
+        pedidoRecup = JSON.parse(localStorage.getItem("carritoStorage"));
+        carrito = pedidoRecup;
+        agregarCarrito();     
+    }
+}
+
 
 // funcion para limpiar el carrito por cada producto que se agrega
 function limpiarAgregar () {
@@ -174,11 +179,8 @@ botonAgregar.addEventListener("click", ()=> {
     } else {
         carrito.push(new pedido (productos[posicion].nombre, productos[posicion].precio, cantidad.value, productos[posicion].imagen, conteoIdCarrito));
     }
-    for (const element of opcionesGalleta) {
-        
-    }
+
     localStorage.setItem("carritoStorage", JSON.stringify(carrito));
-    recupCarrito();
     agregarCarrito();
 
 })
@@ -202,8 +204,14 @@ botonComprar.addEventListener("click", ()=> {
 productosPedidos.addEventListener("click", (event) => {
     botonId = event.target.id;
         carrito = carrito.filter((item) => item.id!= botonId);
+        localStorage.clear();
+        carrito.forEach (producto => {
+            localStorage.setItem("carritoStorage", JSON.stringify(carrito));
+        })
         agregarCarrito();
 })
 
+
+recupCarrito();
 
 
