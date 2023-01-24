@@ -9,17 +9,13 @@ let suma = 0;
 let subtotal;
 let elemento;
 let variedadElegida;
-let conteoIdCarrito = 1;
+let duplicado;
+
 
 
 // funcion para cambiar la imagen de la galleta seleccionada
 function cambiarGalleta (galleta, source) {
     galleta.src = source;
-}
-
-// funcion para asignar el id de los productos en el carrito y de los botones de eliminar
-function sumaConteoIdCarrito () {
-    conteoIdCarrito ++;
 }
 
 // funcion para sumar el iva a los precios de los productos
@@ -53,7 +49,6 @@ function agregarCarrito () {
         elemento.innerHTML += `Nombre: ${item.nombre} <br> Precio: $${item.precio} <br> Cantidad: ${item.cantidad} <button id="${item.id}" type="button" class="btn btn-danger me-2 btnEliminar">Eliminar</button>`;  
         sumaSubTotal(item.precio, item.cantidad); 
         productosPedidos.appendChild(elemento);
-        sumaConteoIdCarrito();
     });
 }
 
@@ -74,7 +69,6 @@ function limpiarAgregar () {
     sumaSubTotal(0, 0);
     productosPedidos.innerHTML = "";
     productosPedidos.appendChild(sumaTotal);
-    conteoIdCarrito = 1;
 }
 
 
@@ -87,6 +81,7 @@ class variedad {
         this.peso = peso;
         this.ingred = ingred;
         this.imagen = imagen;
+        this.id = id;
     }
     ivaPrecio() {
         this.precio = this.precio * 1.21;
@@ -96,9 +91,9 @@ class variedad {
 // array de productos
 const productos = [];
 
-productos.push(new variedad ("Galletas Chips de Chocolate", 2000, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "./images/galletaChipChocolate.jpg"));
-productos.push(new variedad ("Galletas Doble Chocolate", 1900, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaDobleChocolate.jpg"));
-productos.push(new variedad ("Galletas Mani", 1800, 800, "Anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaMani.jpg"));
+productos.push(new variedad ("Galletas Chips de Chocolate", 2000, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "./images/galletaChipChocolate.jpg", 1));
+productos.push(new variedad ("Galletas Doble Chocolate", 1900, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaDobleChocolate.jpg", 2));
+productos.push(new variedad ("Galletas Mani", 1800, 800, "Anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaMani.jpg", 3));
 
 // array y constructor de productos del carrito
 let carrito = [];
@@ -172,31 +167,75 @@ botonMas.addEventListener("click", ()=> {
 })
 
 
-// evento del boton agregar para pushear los productos en el array del carrito y que se muestren
+// evento del boton agregar para pushear los productos en el array del carrito y que se muestren, evitando duplicados. 
 botonAgregar.addEventListener("click", ()=> {
-    if (posicion == undefined) {
-        carrito.push(new pedido (productos[0].nombre, productos[0].precio, cantidad.value, productos[0].imagen, conteoIdCarrito));
-    } else {
-        carrito.push(new pedido (productos[posicion].nombre, productos[posicion].precio, cantidad.value, productos[posicion].imagen, conteoIdCarrito));
-    }
 
-    localStorage.setItem("carritoStorage", JSON.stringify(carrito));
-    agregarCarrito();
+    if (posicion == undefined) {
+        if (carrito.length == 0) {
+            carrito.push(new pedido (productos[0].nombre, productos[0].precio, cantidad.value, productos[0].imagen, productos[0].id));
+        } else {
+            for (const cosa of carrito) {
+                duplicado = carrito.find(cosa => cosa.id == 1);
+            }
+            if (duplicado == undefined){
+                carrito.push(new pedido (productos[0].nombre, productos[0].precio, cantidad.value, productos[0].imagen, productos[0].id));
+            } else {
+                duplicado.cantidad= parseInt(cantidad.value) + parseInt(duplicado.cantidad);
+            }
+        }
+        localStorage.setItem("carritoStorage", JSON.stringify(carrito));
+    } else {
+        
+        for (const cosa of carrito) {
+            duplicado = carrito.find(cosa => cosa.id == elegida.id);
+        }
+            if (duplicado == undefined){
+                carrito.push(new pedido (productos[posicion].nombre, productos[posicion].precio, cantidad.value, productos[posicion].imagen, productos[posicion].id)); 
+            } else {
+                duplicado.cantidad= parseInt(cantidad.value) + parseInt(duplicado.cantidad);
+            }
+        localStorage.setItem("carritoStorage", JSON.stringify(carrito));
+    }    
+
+    agregarCarrito()
 
 })
 
 // evento del boton finalizar compra
 
 botonComprar.addEventListener("click", ()=> {
-    swal({
-        title: "Compra realizada!",
-        text: "Tu pedido ha sido registrado con éxito",
-        icon: "success",
-        button: "Aceptar",
-    });
-    limpiarCarrito ();
-    conteoIdCarrito = 1;
-    localStorage.clear();
+    if (carrito.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se puede realizar el pedido!',
+            footer: '<a href="">Agrega artículos al carrito!</a>'
+        })
+    } else {
+        Swal.fire({
+            title: 'Estas Seguro?',
+            text: "No podras realizar modificaciones al pedido!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Si, deseo confirmar la compra'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Pedido Realizado!',
+                'Tu pedido fue registrado exitosamente.',
+                'success'
+                )
+                limpiarCarrito ();
+                localStorage.clear();
+                duplicado = undefined;
+            }
+        })
+
+    }
+
 })
 
 
