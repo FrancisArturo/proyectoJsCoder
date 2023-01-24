@@ -12,13 +12,19 @@ let variedadElegida;
 let duplicado;
 
 
+// funcion para mostrar los valores del producto por defecto, luego de recibir los productos del archivo Json y pushearlos al array de productos.
+function defecto (){
+    nombreGalleta.innerText = productos[0].nombre;
+    ingredientes.innerText = productos[0].ingredientes;
+    imagen.src = productos[0].imagen;
+}
 
 // funcion para cambiar la imagen de la galleta seleccionada
 function cambiarGalleta (galleta, source) {
     galleta.src = source;
 }
 
-// funcion para sumar el iva a los precios de los productos
+// funcion para sumar el subtotal al total y mostrarlo en el carrito
 function sumaSubTotal(precio, cantidad) {
     subtotal = precio * cantidad;
     suma += subtotal;
@@ -55,7 +61,6 @@ function agregarCarrito () {
 // funcion para recuperar el carrito en el local storage
 function recupCarrito () {
     if (localStorage.length > 0) {
-    
         pedidoRecup = JSON.parse(localStorage.getItem("carritoStorage"));
         carrito = pedidoRecup;
         agregarCarrito();     
@@ -69,49 +74,6 @@ function limpiarAgregar () {
     sumaSubTotal(0, 0);
     productosPedidos.innerHTML = "";
     productosPedidos.appendChild(sumaTotal);
-}
-
-
-// contructor de array de productos
-
-class variedad {
-    constructor(nombre, precio, peso, ingred, imagen, id) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.peso = peso;
-        this.ingred = ingred;
-        this.imagen = imagen;
-        this.id = id;
-    }
-    ivaPrecio() {
-        this.precio = this.precio * 1.21;
-    }
-}
-
-// array de productos
-const productos = [];
-
-productos.push(new variedad ("Galletas Chips de Chocolate", 2000, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "./images/galletaChipChocolate.jpg", 1));
-productos.push(new variedad ("Galletas Doble Chocolate", 1900, 800, "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaDobleChocolate.jpg", 2));
-productos.push(new variedad ("Galletas Mani", 1800, 800, "Anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "./images/galletaMani.jpg", 3));
-
-// array y constructor de productos del carrito
-let carrito = [];
-
-class pedido {
-    constructor(nombre, precio, cantidad, imagen, id) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.cantidad = cantidad;
-        this.imagen = imagen;
-        this.id = id;
-    }
-}
-
-
-// activando la funcion de sumar iva a los precios
-for (const variedad of productos) {
-    variedad.ivaPrecio();
 }
 
 
@@ -133,6 +95,50 @@ let botonEliminar = document.getElementsByClassName("btnEliminar");
 
 cantidad.value = 1;
 
+
+// array y constructor de productos
+const productos = [];
+
+class producto {
+    constructor (nombre, precio, ingredientes, imagen, id) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.ingredientes = ingredientes;
+        this.imagen = imagen;
+        this.id = id;
+    }
+    // ivaPrecio() {
+    //     this.precio = this.precio * 1.21;
+    // }
+}
+
+// array y constructor de productos del carrito
+let carrito = [];
+
+class pedido {
+    constructor(nombre, precio, cantidad, imagen, id) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.imagen = imagen;
+        this.id = id;
+    }
+}
+
+
+//fetch para recibir los productos del archivo Json y pushearlos al array de productos
+fetch('./productos.json')
+    .then( res => res.json())
+    .then( data => data.forEach (prod => {
+        let nuevoProd = new producto (prod.nombre, prod.precio, prod.ingredientes, prod.imagen, prod.id)
+        nuevoProd.precio = nuevoProd.precio * 1.21; //precio con iva
+        productos.push(nuevoProd)
+    }))
+    .then (data => {
+        defecto ()
+    })
+
+
 // agregando evento click para que se cambien las imagenes y que se marque la seleccionada
 for (const element of opcionesGalleta) {
     element.addEventListener("click", ()=> {
@@ -142,7 +148,7 @@ for (const element of opcionesGalleta) {
         posicion = productos.findIndex(variedad => variedad.nombre == variedadElegida);
         cambiarGalleta(imagen, elegida.imagen);
         nombreGalleta.innerText = elegida.nombre;
-        ingredientes.innerText = elegida.ingred;
+        ingredientes.innerText = elegida.ingredientes;
 
         for (const objeto of opcionesGalleta) {
             if ( objeto.id == variedadElegida){
@@ -250,7 +256,8 @@ productosPedidos.addEventListener("click", (event) => {
         agregarCarrito();
 })
 
-
+//llamada a la función para recuperar el carrito del localStorage
 recupCarrito();
+
 
 

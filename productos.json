@@ -1,0 +1,5 @@
+[
+    {"nombre": "Galletas Chips de Chocolate", "precio": 2000, "ingredientes": "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), vainilla, sal marina, bicarbonato de sodio.", "imagen": "./images/galletaChipChocolate.jpg", "id": 1},
+    {"nombre": "Galletas Doble Chocolate", "precio": 1900, "ingredientes": "Anacardos, jarabe de arce, chips de chocolate orgánico (azúcar de caña orgánico, licor de cacao orgánico, manteca de cacao orgánico), cacao orgánico, vainilla, sal marina, bicarbonato de sodio.", "imagen": "./images/galletaDobleChocolate.jpg", "id": 2},
+    {"nombre": "Galletas Mani", "precio": 1800, "ingredientes": "Anacardos, jarabe de arce, maní orgánico, vainilla, sal marina, bicarbonato de sodio.", "imagen": "./images/galletaMani.jpg", "id": 3}
+]
