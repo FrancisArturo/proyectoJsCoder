@@ -139,7 +139,7 @@ fetch('./productos.json')
     })
 
 
-// agregando evento click para que se cambien las imagenes y que se marque la seleccionada
+// evento click para que se cambien las imagenes y que se marque la seleccionada
 for (const element of opcionesGalleta) {
     element.addEventListener("click", ()=> {
         
@@ -151,12 +151,7 @@ for (const element of opcionesGalleta) {
         ingredientes.innerText = elegida.ingredientes;
 
         for (const objeto of opcionesGalleta) {
-            if ( objeto.id == variedadElegida){
-                objeto.classList.add("active");
-            } else {
-                objeto.classList.remove("active");
-            }
-        }
+            objeto.id == variedadElegida ?  objeto.classList.add("active") : objeto.classList.remove("active")}
     })
 }
 
@@ -167,7 +162,7 @@ botonMenos.addEventListener("click", ()=> {
     }
 })
 
-// evento boton mas cantidad
+// evento boton más cantidad
 botonMas.addEventListener("click", ()=> {
     cantidad.value ++;
 })
@@ -210,14 +205,14 @@ botonAgregar.addEventListener("click", ()=> {
 // evento del boton finalizar compra
 
 botonComprar.addEventListener("click", ()=> {
-    if (carrito.length == 0) {
+    carrito.length == 0 ? 
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'No se puede realizar el pedido!',
             footer: '<a href="">Agrega artículos al carrito!</a>'
         })
-    } else {
+        :
         Swal.fire({
             title: 'Estas Seguro?',
             text: "No podras realizar modificaciones al pedido!",
@@ -239,9 +234,6 @@ botonComprar.addEventListener("click", ()=> {
                 duplicado = undefined;
             }
         })
-
-    }
-
 })
 
 
