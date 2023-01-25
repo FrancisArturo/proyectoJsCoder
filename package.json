@@ -1,0 +1,26 @@
+{
+  "name": "proyectocoderjs",
+  "version": "1.1.0",
+  "description": "proyecto js coderhouse",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrancisArturo/proyectoJsCoder.git"
+  },
+  "keywords": [
+    "js",
+    "e-commerce"
+  ],
+  "author": "francis arturo alcalde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FrancisArturo/proyectoJsCoder/issues"
+  },
+  "homepage": "https://github.com/FrancisArturo/proyectoJsCoder#readme",
+  "dependencies": {
+    "sweetalert2": "^11.7.1"
+  }
+}
