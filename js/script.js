@@ -10,6 +10,10 @@ let subtotal;
 let elemento;
 let variedadElegida;
 let duplicado;
+let value1;
+let value2;
+let value3;
+
 
 
 // funcion para mostrar los valores del producto por defecto, luego de recibir los productos del archivo Json y pushearlos al array de productos.
@@ -74,6 +78,44 @@ function limpiarAgregar () {
     sumaSubTotal(0, 0);
     productosPedidos.innerHTML = "";
     productosPedidos.appendChild(sumaTotal);
+}
+
+
+//función para dar los datos para el envio del pedido y que se muestren al final
+async function datosEnvio () {
+    const { value: formValues } = await Swal.fire({
+        title: 'Datos para el envío',
+        html:
+            'Nombre <input type="text" id="swal-input1" class="swal2-input">' +
+            'Apellido <input id="swal-input2" class="swal2-input">'+
+            'Dirección <input id="swal-input3" class="swal2-input">',
+        focusConfirm: false,    
+        preConfirm: () => {
+            return [
+            
+            value1 = document.getElementById('swal-input1').value,
+            value2 = document.getElementById('swal-input2').value,
+            value3 = document.getElementById('swal-input3').value
+            ]
+        },
+    })
+        if (!value1 || !value2 || !value3) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...no se pudo completar la compra',
+            text: 'Debes completar todos los campos para poder completar la compra.',
+            footer: 'Vuelve a intentarlo!'
+        })
+
+    } else {
+        Swal.fire(
+        'Pedido Realizado!',
+        'Felicidades ' + value1 + ' '+ value2 + ', tu pedido fue registrado exitosamente. El envío llegara dentro de las proximas 48hs a 72hs a ' + value3 + '.',
+        'success')
+        limpiarCarrito ();
+        localStorage.clear();
+        duplicado = undefined;
+    }
 }
 
 
@@ -210,7 +252,7 @@ botonComprar.addEventListener("click", ()=> {
             icon: 'error',
             title: 'Oops...',
             text: 'No se puede realizar el pedido!',
-            footer: '<a href="">Agrega artículos al carrito!</a>'
+            footer: 'Agrega artículos al carrito!'
         })
         :
         Swal.fire({
@@ -224,14 +266,7 @@ botonComprar.addEventListener("click", ()=> {
             confirmButtonText: 'Si, deseo confirmar la compra'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                'Pedido Realizado!',
-                'Tu pedido fue registrado exitosamente.',
-                'success'
-                )
-                limpiarCarrito ();
-                localStorage.clear();
-                duplicado = undefined;
+                datosEnvio ();
             }
         })
 })
@@ -250,6 +285,8 @@ productosPedidos.addEventListener("click", (event) => {
 
 //llamada a la función para recuperar el carrito del localStorage
 recupCarrito();
+
+
 
 
 
