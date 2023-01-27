@@ -149,9 +149,6 @@ class producto {
         this.imagen = imagen;
         this.id = id;
     }
-    // ivaPrecio() {
-    //     this.precio = this.precio * 1.21;
-    // }
 }
 
 // array y constructor de productos del carrito
